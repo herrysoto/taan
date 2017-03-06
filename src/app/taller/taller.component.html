@@ -234,7 +234,7 @@
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="numpreciosugerido">Mano de Obra</label></div><!--[(ngModel)]="cuadroSeleccionado3.numpreciosugerido" [value]="cuadroSeleccionado3.numpreciosugerido" (keyup)="mostrarPrecioSugerido(numpreciosugerido.value)"-->
-            <div class="ui-grid-col-8"><input style="background-color: black;color: white;" pInputText id="numpreciosugerido" [value]="cuadroSeleccionado3.numpreciosugerido" (keyup)="mostrarPrecioSugerido(numpreciosugerido.value)" [disabled]="true"/></div>  
+            <div class="ui-grid-col-8"><input style="background-color: black;color: white;" pInputText id="numpreciosugerido" [(ngModel)]="cuadroSeleccionado3.numpreciosugerido" [disabled]="true"/></div>  
           </div>
           <div class="ui-grid-row" *ngIf="mostrardscto">
             <div class="ui-grid-col-4"><label for="numdescuento">DSCTO</label></div>
