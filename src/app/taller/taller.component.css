@@ -166,3 +166,8 @@ border:#2B4F81;
 .ng-invalid:not(form) {
     border-left: 5px solid #a94442;
 }*/
+
+.table tr.active td {
+  background-color:#123456 !important;
+  color: white;
+}

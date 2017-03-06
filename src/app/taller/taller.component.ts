@@ -96,6 +96,8 @@ beanservicios : beanservicios[];
   mostrardscto:boolean;
   mostrarhorarhombreread:boolean;
   mostrardsctoread:boolean;
+	selectedRow : Number;
+    setClickedRow : Function;
 
 
   constructor(private _flatrateservice : Flatrateservice,private confirmationService:ConfirmationService ) {
@@ -104,6 +106,9 @@ beanservicios : beanservicios[];
     this.cuadroSeleccionado0 = new beanoperacionservicios();
     this.cuadroSeleccionado3 = new beanoperacionservicios();
     this.contenidoseleccionado = new beanoperacionservicioscontenido();
+		this.setClickedRow = function(index){
+            this.selectedRow = index;
+        }
   }
 
   //Esta funcion me ayuda a obtener el objeto produccio que esta en el html
@@ -165,6 +170,8 @@ beanservicios : beanservicios[];
                          this.getCuadros3(this.default3);},
                        error =>  this.errorMessage = <any>error);
     }
+
+		
 
 //llama al servicio get para que pueda listar en primera instancia a los valores de la tabla,recibe argumento del seleccionar2
     getCuadros3(argumento2:string):void {
@@ -321,6 +328,7 @@ savehh(numhorashombre:number){
             this.cuadroSeleccionado3=0;
             this.cuadroSeleccionado0 = null;
             this.Actualizaritemdialog=false;
+						this.selectedRow = null;
         }})
     }
 
@@ -366,6 +374,7 @@ savehh(numhorashombre:number){
     //Esta funcion sirve para el boton salir del ver Horas Hombre
     salirHorasHombre(){
         this.Actulizarhhdialog = false;
+				this.selectedRow = null;
     }
 
 
@@ -464,6 +473,7 @@ savehh(numhorashombre:number){
          this.nwhh = 0;
          this.newdesc=0;
          this.multipsugerido = 0;
+				 this.selectedRow = null;
     }
 
 
@@ -480,6 +490,7 @@ savehh(numhorashombre:number){
          this.cuadroSeleccionado3.numdescuento = this.valordesctodefault;
          this.cuadroSeleccionado3.numhorashombre = this.valornumhhdefault;
          this.cuadroSeleccionado3 = 0;
+				 this.selectedRow = null;
     }
     //esta funcion sirve para que el numero de trabajo no se actualice solo
     mostrarNumeroTrabajo(ntrabajo){
@@ -607,6 +618,7 @@ savehh(numhorashombre:number){
 //esta funcion sirve para poner salir a las opciones de ver o editar
 SalirVeroeditardialog(){
     this.Veroeditardialog = false;
+		this.selectedRow = null;
 }
 
 //funcion para que escoja que hacer si editar item o ver contenidos
@@ -713,6 +725,10 @@ Buscaroperacionservicioparam(){
                     }
                 )
         }
+
+		CerrarContenido(){
+			this.selectedRow = null;
+		}
     
     //INICIALIZA LAS FUNCIONES PARA QUE CARGEN AL MISMO INSTANTE
     ngOnInit(): void {

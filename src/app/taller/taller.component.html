@@ -87,7 +87,7 @@
 				<div id="secondtable"  style="height: 418px;width: 98%;top: -21px;left: 18px;position: relative;overflow-y: scroll;">
 				<table class="table table-bordered mytable table-hover" style="border-width: thin;font-size: 12px;width: 100%;table-layout: fixed;display: table;" border="1"  *ngIf='beanoperacionservicios && beanoperacionservicios.length'    cellpadding="9" cellspacing="0" align="center">
 					<tbody>
-						<tr class="tt" *ngFor="let beanoperacionservicio of beanoperacionservicios" (click)="Clickgrid(beanoperacionservicio)" style="cursor: pointer;">
+						<tr class="tt" *ngFor="let beanoperacionservicio of beanoperacionservicios; let i = index" (click)="setClickedRow(i)" (click)="Clickgrid(beanoperacionservicio)" style="cursor: pointer;" [class.active]="i == selectedRow">
           		<!--<td style="text-align: center;">{{beanoperacionservicio.numnropieza}}</td>-->
           		<td>{{beanoperacionservicio.codigo}}</td>
               <!--<td>{{beanoperacionservicio.vchnrotrabajo}}</td>-->
@@ -367,7 +367,7 @@
 			                </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-dismiss="modal" class="btn btn-default" >Regresar</button>
+                  <button type="button" data-dismiss="modal" class="btn btn-default" (click)="CerrarContenido()">Regresar</button>
                 </div>
                </div>
               </div>
