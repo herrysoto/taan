@@ -33,6 +33,8 @@ export class Flatrateservice {
   private _produccion13Url = 'http://localhost:8083/api/v1/Getnumcodigoop';
   private _produccion14Url = 'http://localhost:8083/api/v1/DeleteContenido';
   private _produccion15Url = 'http://localhost:8083/api/v1/UpdateGrilla';
+  private _produccion16Url = 'http://localhost:8083/api/v1/Getnumcodigooperacionmaestra';
+  private _produccion17Url = 'http://localhost:8083/api/v1/Nuevocontenido';
 
   //para servidor
   // private _produccion1Url = 'http://10.0.0.249:8083/api/v1/firstcombo';
@@ -48,7 +50,8 @@ export class Flatrateservice {
   // private _produccion11Url = 'http://10.0.0.249:8083/api/v1/BuscarOperServiciosParam';
   // private _produccion12Url = 'http://10.0.0.249:8083/api/v1/LISTAROPERSERVCONTENIDOS';
   // private _produccion13Url = 'http://10.0.0.249:8083/api/v1/Getnumcodigoop';
-  // private _produccion14Url = 'http://10.0.0.249:8083/api/v1/GetNumMaestra';
+  // private _produccion14Url = 'http://10.0.0.249:8083/api/v1/DeleteContenido';
+  // private _produccion15Url = 'http://10.0.0.249:8083/api/v1/UpdateGrilla';
   lessons = [];
   constructor(private http: Http) { }
 
@@ -163,6 +166,13 @@ export class Flatrateservice {
       .map((res: Response) => res.json())
 
       ._catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  Getnumcodigooperacionmaestra():Observable<any>{
+    return this.http.get(this._produccion16Url)
+      .map((res: Response) => res.json())
+
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   private extractData(res: Response) {

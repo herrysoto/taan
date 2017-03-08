@@ -1,3 +1,4 @@
+import { beancodigooperacionmaestra } from './Bean/beancodigooperacionmaestra';
 import { beanNumMaestra } from './Bean/beanNumMaestra';
 import { Component, OnInit,Input } from '@angular/core';
 import { beanservicios } from './Bean/beanservicios';
@@ -39,6 +40,7 @@ beanservicios : beanservicios[];
   beanoperacionservicioscontenido : beanoperacionservicioscontenido[];
   beanoperacionservicios2 : beanoperacionservicios2[];
   beanNumMaestra : beanNumMaestra[];
+  beancodigooperacionmaestra : beancodigooperacionmaestra[];
   beanNumCodigo : beanNumCodigo[];
   beanHoraHombre : beanHoraHombre[];
   cuadroSeleccionado0 : beanoperacionservicios;
@@ -98,6 +100,7 @@ beanservicios : beanservicios[];
   mostrardsctoread:boolean;
 	selectedRow : Number;
     setClickedRow : Function;
+    valor : number;
 
 
   constructor(private _flatrateservice : Flatrateservice,private confirmationService:ConfirmationService ) {
@@ -179,7 +182,7 @@ beanservicios : beanservicios[];
       this._flatrateservice.getProduccion3(argumento2)
       .subscribe(
         beanoperacionservicios =>{this.beanoperacionservicios = beanoperacionservicios
-            if(this.valorvch=='1W' || this.valorvch=='1X'){
+            if(this.valorvch=='1W' || this.valorvch=='1X' || this.valorvch=='1Z'){
                 this.mostrarhorarhombreread=true;
                 this.mostrardsctoread=true;
                 this.mostrarhorarhombre=false;
@@ -729,9 +732,23 @@ Buscaroperacionservicioparam(){
 		CerrarContenido(){
 			this.selectedRow = null;
 		}
+
+
+    //obtener coodigo maestro
+    Getnumcodigooperacionmaestra(){
+        this._flatrateservice.Getnumcodigooperacionmaestra()
+            .subscribe(
+                maestra => { this.beancodigooperacionmaestra = maestra
+                    this.valor = this.beancodigooperacionmaestra[0].numcodigooperacionmaestra;
+                // console.log(this.beancodigooperacionmaestra[0].numcodigooperacionmaestra);
+                }
+            );
+            console.log(this.valor)
+    }
     
     //INICIALIZA LAS FUNCIONES PARA QUE CARGEN AL MISMO INSTANTE
     ngOnInit(): void {
+        this.Getnumcodigooperacionmaestra();
         this.buscardescripcion = '';
         this.Getnumcodigoop();
       this.Getnumcodigo();
