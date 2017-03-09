@@ -216,14 +216,13 @@ beanservicios : beanservicios[];
                 this.numcod = this.beanHoraHombre[0].numcodigo;//trae el nuevo numero de codigo para actualizar el horas hombre
             }
         )
+
     }
 
 //sta funcion sirve para insertar en la tabla horas hombre el nuevo valor de horas hombre
 PostHorasHombres(numcodigo:number,numhorashombre:number){
     // numcodigo = this.numcod;
     // numhorashombre = this.numhorashombre;
-     console.log(numcodigo);
-    console.log(numhorashombre);
     this._flatrateservice.PostHorasHombres(numcodigo,numhorashombre)
             .subscribe(
                 act => {this.getCuadros3(this.valorvch);}
@@ -251,13 +250,13 @@ savehh(numhorashombre:number){
 //funcion para que me traiga valor repetidos al momento de registrar
     Getcodigovalidacion(vchcodigooperacion:string,chrcodigooperacionservicio:string,vchnrotrabajo:string,vchdescripcion:string,numhorashombre:number,numpreciosugerido:number,
                         numdescuento:number,numtotal:number):any{
-                            console.log("entro aqui a validar CODIGO")
+                            
         // this.pruebavali = this.newchrcodigooperacionservicio;
         this._flatrateservice.Getcodigovalidacion(this.valorvch,chrcodigooperacionservicio)
         .subscribe(
             
             prue =>{ 
-                if(prue == null){console.log("entro aqui true");  
+                if(prue == null){ 
               this.save(vchcodigooperacion,chrcodigooperacionservicio,vchnrotrabajo,vchdescripcion,numhorashombre,numpreciosugerido,numdescuento,numtotal);
 
                 }else{
@@ -734,16 +733,19 @@ Buscaroperacionservicioparam(){
 		}
 
 
-    //obtener coodigo maestro
+    //obtener coodigo maestro para agregar contenido
     Getnumcodigooperacionmaestra(){
         this._flatrateservice.Getnumcodigooperacionmaestra()
             .subscribe(
                 maestra => { this.beancodigooperacionmaestra = maestra
                     this.valor = this.beancodigooperacionmaestra[0].numcodigooperacionmaestra;
-                // console.log(this.beancodigooperacionmaestra[0].numcodigooperacionmaestra);
                 }
             );
-            console.log(this.valor)
+    }
+
+    //funcion para agregar el contenido
+    Nuevocontenido(){
+        
     }
     
     //INICIALIZA LAS FUNCIONES PARA QUE CARGEN AL MISMO INSTANTE
