@@ -175,6 +175,15 @@ export class Flatrateservice {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  Nuevocontenido(numcodigooperacionmaestra:number,vchoperacionmaestra:string,vchcodigooperacion:string,chrcodigooperacionservicio:string,chrestado:string,numcodigomaster:number,numcodigoitem:number): Observable<any[]>{
+    return this.http.post(this._produccion17Url,{numcodigooperacionmaestra:numcodigooperacionmaestra,vchoperacionmaestra:vchoperacionmaestra,
+                                                vchcodigooperacion:vchcodigooperacion,chrcodigooperacionservicio:chrcodigooperacionservicio,chrestado:chrestado,
+                                                numcodigomaster:numcodigomaster,numcodigoitem:numcodigoitem})
+      .map((res: Response) => res.json())
+
+      ._catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.data || {};

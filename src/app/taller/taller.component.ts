@@ -35,8 +35,11 @@ msgs: Message[] = [];
   items: MenuItem[];
 
 beanservicios : beanservicios[];
+beanservicioscontenido : beanservicios[];
   beanoperacion : beanoperacion[];
+  beanoperacioncontenido : beanoperacion[];
   beanoperacionservicios : beanoperacionservicios[];
+  beanoperacionserviciosnewcontenido : beanoperacionservicioscontenido[];
   beanoperacionservicioscontenido : beanoperacionservicioscontenido[];
   beanoperacionservicios2 : beanoperacionservicios2[];
   beanNumMaestra : beanNumMaestra[];
@@ -100,6 +103,8 @@ beanservicios : beanservicios[];
   mostrardsctoread:boolean;
 	selectedRow : Number;
     setClickedRow : Function;
+    selectedcontenido : Number;
+    setClickedcontenido : Function;
     valor : number;
 
 
@@ -111,6 +116,9 @@ beanservicios : beanservicios[];
     this.contenidoseleccionado = new beanoperacionservicioscontenido();
 		this.setClickedRow = function(index){
             this.selectedRow = index;
+        }
+        this.setClickedcontenido = function(index){
+            this.selectedcontenido = index;
         }
   }
 
@@ -154,7 +162,7 @@ beanservicios : beanservicios[];
   getCuadros(): void {
       this._flatrateservice.getProduccion()
                      .subscribe(
-                       cuadros =>{this.beanservicios = cuadros
+                       cuadros =>{this.beanservicios = cuadros;
                            this.default = this.beanservicios[0].vchdescripcion
                            this.default1 = this.beanservicios[0].chrcodigoservicio  //trae como valor 01
                         //    console.log(this.default1)
@@ -730,11 +738,13 @@ Buscaroperacionservicioparam(){
 
 		CerrarContenido(){
 			this.selectedRow = null;
+            this.selectedcontenido =  null;
 		}
 
 
     //obtener coodigo maestro para agregar contenido
     Getnumcodigooperacionmaestra(){
+        this.selectedcontenido =  null;
         this._flatrateservice.Getnumcodigooperacionmaestra()
             .subscribe(
                 maestra => { this.beancodigooperacionmaestra = maestra
@@ -744,9 +754,72 @@ Buscaroperacionservicioparam(){
     }
 
     //funcion para agregar el contenido
-    Nuevocontenido(){
-        
+    clickContenido(beanoperacionservicionewc:beanoperacionservicioscontenido){
+         console.log(this.cuadroSeleccionado3.numcodigo);
+           this._flatrateservice.Nuevocontenido(this.valor,this.cuadroSeleccionado3.vchcodigooperacion+this.cuadroSeleccionado3.chrcodigooperacionservicio,beanoperacionservicionewc.vchcodigooperacion,
+           beanoperacionservicionewc.chrcodigooperacionservicio,beanoperacionservicionewc.chrestado,this.cuadroSeleccionado3.numcodigo,beanoperacionservicionewc.numcodigo)
+            .subscribe(
+                nuevocontenido => {
+                    this.EscogerVerContenidos();
+                }
+            )
     }
+
+    //Comienzan las funciones para que me obtenga el cuadro de agregar contenido :)
+
+    mostrarprodcontenido(produccio){
+        // this.cuadroSeleccionado0 = produccio.substring(0, 2);
+        // console.log(produccio.substring(0, 2));
+        // console.log("hola");
+        // console.log(produccio);
+        // console.log(this.cuadroSeleccionado0);
+        // console.log("fin");
+          this.Obtenersegundocombo(produccio.substring(0, 2));
+    }
+
+    mostrarprod2contenido(produccio2){
+        // this.cuadroSeleccionado0 = produccio.substring(0, 2);
+        // console.log(produccio2.substring(0, 2));
+        // console.log("hola");
+        // console.log(produccio);
+        // console.log(this.cuadroSeleccionado0);
+        // console.log("fin");
+     this.Obtenergrillacontenido(produccio2.substring(0, 2));
+    }
+
+    Obtenerprimercombo(){
+        this._flatrateservice.getProduccion()
+                     .subscribe(
+                       cuadros =>{
+                           this.beanservicioscontenido = cuadros;
+                           this.default = this.beanservicioscontenido[0].vchdescripcion
+                           this.default1 = this.beanservicioscontenido[0].chrcodigoservicio  //trae como valor 01
+                        this.Obtenersegundocombo(this.default1);} ,  
+                       error =>  this.errorMessage = <any>error);
+    }
+
+    Obtenersegundocombo(argumento:string){ 
+      this._flatrateservice.getProduccion2(argumento)
+                     .subscribe(
+                       cuadros2 => {this.beanoperacioncontenido = cuadros2;
+                           this.default2= this.beanoperacioncontenido[0].vchdescripcion;
+                           this.default3= this.beanoperacioncontenido[0].vchcodigooperacion;
+                        //    console.log(this.default3),
+                        this.Obtenergrillacontenido(this.default3);
+                    },
+                    error =>  this.errorMessage = <any>error);
+    
+    }
+
+    Obtenergrillacontenido(argumento2:string){
+      this._flatrateservice.getProduccion3(argumento2)
+      .subscribe(
+        beanoperacionservicios =>{this.beanoperacionserviciosnewcontenido = beanoperacionservicios
+        },
+        error => this.errorMessage = <any>error);
+    }
+
+    
     
     //INICIALIZA LAS FUNCIONES PARA QUE CARGEN AL MISMO INSTANTE
     ngOnInit(): void {
