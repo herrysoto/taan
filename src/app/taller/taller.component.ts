@@ -728,12 +728,22 @@ Buscaroperacionservicioparam(){
     //Obtener el numcodigooperacionmaestra
 
         DeleteContenido(beanoperacionserviciocontenidoseleccionado:beanoperacionservicioscontenido){
-            this._flatrateservice.DeleteContenido(beanoperacionserviciocontenidoseleccionado.numcodigooperacionmaestra)
-                .subscribe(
-                    cod => { this.beanNumMaestra = cod;
-                    this.VerContenidos(this.cuadroSeleccionado3);
-                    }
-                )
+            this.confirmationService.confirm({
+                message: '¿Está seguro que desea eliminar el Item?',
+                accept: () =>{
+                    // this.showDialogToAdd();
+                    this._flatrateservice.DeleteContenido(beanoperacionserviciocontenidoseleccionado.numcodigooperacionmaestra)
+                        .subscribe(
+                            cod => { this.beanNumMaestra = cod;
+                            this.VerContenidos(this.cuadroSeleccionado3);
+                            }
+                        )
+                },
+                // reject: () =>{
+                    
+                // }
+                }) 
+            
         }
 
 		CerrarContenido(){
@@ -761,6 +771,7 @@ Buscaroperacionservicioparam(){
             .subscribe(
                 nuevocontenido => {
                     this.EscogerVerContenidos();
+                    this.Getnumcodigooperacionmaestra();
                 }
             )
     }
