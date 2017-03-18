@@ -107,6 +107,7 @@ beanservicioscontenido : beanservicios[];
     setClickedcontenido : Function;
     valor : number;
     esrepetido : boolean;
+    entraporbuscar:boolean;
 
 
   constructor(private _flatrateservice : Flatrateservice,private confirmationService:ConfirmationService ) {
@@ -697,7 +698,11 @@ SalirVeroeditardialog(){
         this._flatrateservice.UpdateGrilla(this.totalmanoobracontenido,this.totalcontenido,this.totaldsctcontenido,this.totalhhcontenido,this.cuadroSeleccionado3.vchcodigooperacion,this.cuadroSeleccionado3.chrcodigooperacionservicio)
                 .subscribe(
                     newgrilla => {
-                        this.getCuadros3(this.valorvch);
+                        if(this.entraporbuscar){
+                        }
+                        else{
+                            this.getCuadros3(this.valorvch);
+                        }
                     }
                 )
     }
@@ -711,6 +716,7 @@ Ingresaroperacionservicioparam(descripcion){
 }
 
 Buscaroperacionservicioparam(){
+    this.entraporbuscar = true;
     if(this.buscardescripcion.length == 0){
         alert("Debe ingresar un texto para buscar");
     }else{
