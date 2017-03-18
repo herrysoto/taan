@@ -33,7 +33,7 @@ export class TallerComponent implements OnInit {
 
 msgs: Message[] = [];
   items: MenuItem[];
-
+  numeros:any;
 beanservicios : beanservicios[];
 beanservicioscontenido : beanservicios[];
   beanoperacion : beanoperacion[];
@@ -106,6 +106,7 @@ beanservicioscontenido : beanservicios[];
     selectedcontenido : Number;
     setClickedcontenido : Function;
     valor : number;
+    esrepetido : boolean;
 
 
   constructor(private _flatrateservice : Flatrateservice,private confirmationService:ConfirmationService ) {
@@ -634,6 +635,17 @@ SalirVeroeditardialog(){
 //funcion para que escoja que hacer si editar item o ver contenidos
     Clickgrid(cuad:beanoperacionservicios){
         this.cuadroSeleccionado3 = cuad;
+        if(this.cuadroSeleccionado3.vchcodigooperacion=='1W' || this.cuadroSeleccionado3.vchcodigooperacion=='1X' || this.cuadroSeleccionado3.vchcodigooperacion=='1Z'){
+                this.mostrarhorarhombreread=true;
+                this.mostrardsctoread=true;
+                this.mostrarhorarhombre=false;
+                this.mostrardscto= false;
+            }else{
+                this.mostrarhorarhombre=true;
+                this.mostrardscto= true;
+                this.mostrarhorarhombreread=false;
+                this.mostrardsctoread=false;
+            }
         this.Veroeditardialog = true;
     }
 
@@ -662,6 +674,10 @@ SalirVeroeditardialog(){
                         for (let num of contenido){
                             // contenido.forEach((numpreciosugerido) => {total} );//total.push(Number(num.numpreciosugerido)), Iteramos el array llamado: arr1. Con el método Number los declaramos enteros y los sumamos
                             // console.log(total);
+                             this.numeros = new Array();
+                             this.numeros.push(num.codigo)
+                            // this.obtenercodigocontenido(this.numeros);
+                            // console.log(this.numeros)
                             this.totalmanoobracontenido =this.totalmanoobracontenido + num.numpreciosugerido;
                             this.totalmanoobracontenido = parseFloat(this.totalmanoobracontenido.toFixed(2));
                             this.totalhhcontenido = this.totalhhcontenido + num.numhorashombre;
@@ -669,7 +685,7 @@ SalirVeroeditardialog(){
                             this.totalcontenido = this.totalmanoobracontenido - this.totaldsctcontenido;
                         }
                         this.UpdateGrilla(this.totaldsctcontenido,this.totalhhcontenido,this.totalmanoobracontenido,this.totalcontenido);
-                    }
+                    }   
             )
     }
 
@@ -763,9 +779,37 @@ Buscaroperacionservicioparam(){
             );
     }
 
+  
+    //Validar que no se ingresen items repetidos
+     IsRepetido(beanoperacionservicionewc:beanoperacionservicioscontenido):Boolean{                
+                             for (let num of this.beanoperacionservicioscontenido){
+                                 if (beanoperacionservicionewc.codigo == num.codigo ){
+                                    return true;
+                                 }
+                             }
+            return false;
+    }   
+
+    
+    validarcontenido(beanoperacionservicionewc:beanoperacionservicioscontenido):void{
+        if(beanoperacionservicionewc.vchcodigooperacion == '1X' || beanoperacionservicionewc.vchcodigooperacion == '1W' || beanoperacionservicionewc.vchcodigooperacion == '1Z'){
+            alert("No se puede insertar un servicio contenido");
+            this.selectedcontenido =  null;
+            return
+        }
+        if (this.IsRepetido(beanoperacionservicionewc)==true) {
+            alert("No se puede insertar un servicio contenido porque ya existe");
+            this.selectedcontenido =  null;
+            return
+        }
+        this.clickContenido(beanoperacionservicionewc);
+    }
+
     //funcion para agregar el contenido
     clickContenido(beanoperacionservicionewc:beanoperacionservicioscontenido){
-         console.log(this.cuadroSeleccionado3.numcodigo);
+        this.confirmationService.confirm({
+                message: '¿Está seguro que desea agregar este Item?',
+                accept: () =>{
            this._flatrateservice.Nuevocontenido(this.valor,this.cuadroSeleccionado3.vchcodigooperacion+this.cuadroSeleccionado3.chrcodigooperacionservicio,beanoperacionservicionewc.vchcodigooperacion,
            beanoperacionservicionewc.chrcodigooperacionservicio,beanoperacionservicionewc.chrestado,this.cuadroSeleccionado3.numcodigo,beanoperacionservicionewc.numcodigo)
             .subscribe(
@@ -774,27 +818,20 @@ Buscaroperacionservicioparam(){
                     this.Getnumcodigooperacionmaestra();
                 }
             )
+                },
+         reject: () =>{
+                    this.selectedcontenido =  null;
+                 }    
+        })
     }
 
     //Comienzan las funciones para que me obtenga el cuadro de agregar contenido :)
 
     mostrarprodcontenido(produccio){
-        // this.cuadroSeleccionado0 = produccio.substring(0, 2);
-        // console.log(produccio.substring(0, 2));
-        // console.log("hola");
-        // console.log(produccio);
-        // console.log(this.cuadroSeleccionado0);
-        // console.log("fin");
           this.Obtenersegundocombo(produccio.substring(0, 2));
     }
 
     mostrarprod2contenido(produccio2){
-        // this.cuadroSeleccionado0 = produccio.substring(0, 2);
-        // console.log(produccio2.substring(0, 2));
-        // console.log("hola");
-        // console.log(produccio);
-        // console.log(this.cuadroSeleccionado0);
-        // console.log("fin");
      this.Obtenergrillacontenido(produccio2.substring(0, 2));
     }
 

@@ -328,7 +328,7 @@
             <div class="operacion-servicio" style="display:inline-block;">
               <span style="margin-right: 20px;">{{cuadroSeleccionado3.codigo}}</span> <span>{{cuadroSeleccionado3.vchdescripcion}}</span>
             </div>
-            <div class="totales-contenidos" style="position:relative;display:inline-block;margin-left: 82px;">
+            <div class="totales-contenidos" style="position:relative;display:inline-block;margin-left: 82px;float: right;bottom: 10px;">
               <div class="mano-de-obra" style="display:inline-block;margin-right:20px;">
                 <span>Mano de obra</span><input class="form-control pre-contenido" type="text" placeholder="Readonly" [(ngModel)]="totalmanoobracontenido"
                   style="width:90px;" readonly>
@@ -346,10 +346,6 @@
                   style="width:90px;" readonly>
               </div>
             </div>
-            <button class="btn btn-primary" type="button" (click)="Getnumcodigooperacionmaestra()" (click)="Obtenerprimercombo()" data-toggle="collapse" data-target="#collapseExample"
-              aria-expanded="false" aria-controls="collapseExample">
-              AGREGAR
-          </button>
           </div>
           <!-- tabla con html sin scroll -->
           <div id="secondtable" style="width: 98%;left: 18px;margin-top: 10px;display: block;position: relative;">
@@ -409,9 +405,15 @@
               </tbody>
             </table>
           </div>
+          <div class="operacion-servicio" style="display:inline-block;">
+          <button class="btn btn-primary" type="button" (click)="Getnumcodigooperacionmaestra()" (click)="Obtenerprimercombo()" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" aria-controls="collapseExample">
+              AGREGAR CONTENIDO
+          </button>
+          </div>
             <!--Esta seccion es para poder ver los contenidos que se pueden agregar-->
           <div class="collapse" id="collapseExample">
-            <div class="well" style="background-image: linear-gradient(to bottom,rgba(94, 101, 121, 0.82) 0,rgb(245, 245, 245) 100%);">
+            <div class="well" style="background-image: linear-gradient(to bottom,rgba(94, 101, 121, 0.82) 0,rgb(245, 245, 245) 100%);margin-bottom: 9px;padding: 8px;">
               <h4 class="modal-title" id="myModalLabel" align="center">Selección de Servicios Contenidos</h4>
               <!--los select para escoger las listas-->
               <section>
@@ -458,8 +460,8 @@
                   border="1" *ngIf='beanoperacionserviciosnewcontenido && beanoperacionserviciosnewcontenido.length' cellpadding="9" cellspacing="0"
                   align="center">
                   <tbody style="font-size: 13px;overflow-y: auto !important;height: 400px !important">
-                    <tr *ngFor="let beanoperacionservicionewc of beanoperacionserviciosnewcontenido; let i = index" (click)="setClickedcontenido(i)" (click)="clickContenido(beanoperacionservicionewc)"
-          style="cursor: pointer;" [class.active]="i == selectedcontenido" style="cursor: pointer;font-size: 11px;">
+                    <tr *ngFor="let beanoperacionservicionewc of beanoperacionserviciosnewcontenido; let i = index" (click)="setClickedcontenido(i)"
+          style="cursor: pointer;" [class.active]="i == selectedcontenido" (click)="validarcontenido(beanoperacionservicionewc)" style="cursor: pointer;font-size: 11px;">
                       <td style="width: 69px;">{{beanoperacionservicionewc.codigo}}</td>
                       <td style="width: 480px;">{{beanoperacionservicionewc.vchdescripcion}}</td>
                       <td style="text-align:right;">{{beanoperacionservicionewc.numhorashombre | number:'.1-2'}}</td>
