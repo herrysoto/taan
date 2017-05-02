@@ -18,9 +18,9 @@ export class Flatrateservice {
   //private _produccion1Url = 'http://10.0.0.249:8083/api/v1/firstcombo';
 
   //para local
-  private _produccion1Url = 'http://localhost:8083/api/v1/firstcombo';
-  private _produccion2Url = 'http://localhost:8083/api/v1/secondcomb';
-  private _produccion3Url = 'http://localhost:8083/api/v1/grid';
+  private _produccion1Url = 'http://localhost:8080/api/v1/primercombo';
+  private _produccion2Url = 'http://localhost:8080/api/v1/segundocombo';
+  private _produccion3Url = 'http://localhost:8080/api/v1/grilla';
   private _produccion4Url = 'http://localhost:8083/api/v1/post';
   private _produccion5Url = 'http://localhost:8083/api/v1/HorasHombres';
   private _produccion6Url = 'http://localhost:8083/api/v1/PutOperaServi';
