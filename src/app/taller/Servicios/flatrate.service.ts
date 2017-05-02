@@ -22,10 +22,10 @@ export class Flatrateservice {
   private _produccion2Url = 'http://localhost:8080/api/v1/segundocombo';
   private _produccion3Url = 'http://localhost:8080/api/v1/grilla';
   private _produccion4Url = 'http://localhost:8083/api/v1/post';
-  private _produccion5Url = 'http://localhost:8083/api/v1/HorasHombres';
+  private _produccion5Url = 'http://localhost:8080/api/v1/horashombre';
   private _produccion6Url = 'http://localhost:8083/api/v1/PutOperaServi';
   private _produccion7Url = 'http://localhost:8083/api/v1/PutHorasHombre';
-  private _produccion8Url = 'http://localhost:8083/api/v1/Getnumcodigo';
+  private _produccion8Url = 'http://localhost:8080/api/v1/Getnumcodigo';
   private _produccion9Url = 'http://localhost:8083/api/v1/PostHorasHombres';
   private _produccion10Url = 'http://localhost:8083/api/v1/Getcodigovalidacion';
   private _produccion11Url = 'http://localhost:8083/api/v1/BuscarOperServiciosParam';
