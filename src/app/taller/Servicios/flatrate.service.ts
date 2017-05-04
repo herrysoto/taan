@@ -18,40 +18,42 @@ export class Flatrateservice {
   //private _produccion1Url = 'http://10.0.0.249:8083/api/v1/firstcombo';
 
   //para local
-  private _produccion1Url = 'http://localhost:8080/api/v1/primercombo'; //JAVA
-  private _produccion2Url = 'http://localhost:8080/api/v1/segundocombo'; //JAVA
-  private _produccion3Url = 'http://localhost:8080/api/v1/grilla';//JAVA
-  private _produccion4Url = 'http://localhost:8083/api/v1/post';
-  private _produccion5Url = 'http://localhost:8080/api/v1/horashombre';//JAVA
-  private _produccion6Url = 'http://localhost:8083/api/v1/PutOperaServi';
-  private _produccion7Url = 'http://localhost:8083/api/v1/PutHorasHombre';
-  private _produccion8Url = 'http://localhost:8080/api/v1/Getnumcodigo';//JAVA
-  private _produccion9Url = 'http://localhost:8083/api/v1/PostHorasHombres';
-  private _produccion10Url = 'http://localhost:8080/api/v1/buscarvalid';//JAVA
-  private _produccion11Url = 'http://localhost:8080/api/v1/buscar';//JAVA
-  private _produccion12Url = 'http://localhost:8080/api/v1/listacontenidos';//JAVA
-  private _produccion13Url = 'http://localhost:8080/api/v1/buscarnumcod';//JAVA
-  private _produccion14Url = 'http://localhost:8083/api/v1/DeleteContenido';
-  private _produccion15Url = 'http://localhost:8083/api/v1/UpdateGrilla';
-  private _produccion16Url = 'http://localhost:8080/api/v1/buscarcodmaestra';//JAVA
-  private _produccion17Url = 'http://localhost:8083/api/v1/Nuevocontenido';
+  //  private _produccion1Url = 'http://localhost:8080/api/v1/primercombo'; //JAVA
+  //  private _produccion2Url = 'http://localhost:8080/api/v1/segundocombo'; //JAVA
+  //  private _produccion3Url = 'http://localhost:8080/api/v1/grilla';//JAVA
+   private _produccion4Url = 'http://localhost:8083/api/v1/post';
+  //  private _produccion5Url = 'http://localhost:8080/api/v1/horashombre';//JAVA
+   private _produccion6Url = 'http://localhost:8090/api/v1/actualizaroperacionservicio'; //JAVA
+   private _produccion7Url = 'http://localhost:8090/api/v1/actualizarhorashombre'; //JAVA
+  //  private _produccion8Url = 'http://localhost:8080/api/v1/Getnumcodigo';//JAVA
+   private _produccion9Url = 'http://localhost:8083/api/v1/PostHorasHombres'; 
+  //  private _produccion10Url = 'http://localhost:8080/api/v1/buscarvalid';//JAVA
+  //  private _produccion11Url = 'http://localhost:8080/api/v1/buscar';//JAVA
+  //  private _produccion12Url = 'http://localhost:8080/api/v1/listacontenidos';//JAVA
+  //  private _produccion13Url = 'http://localhost:8080/api/v1/buscarnumcod';//JAVA
+   private _produccion14Url = 'http://localhost:8083/api/v1/DeleteContenido';
+   private _produccion15Url = 'http://localhost:8090/api/v1/actualizargrilla'; //JAVA
+  //  private _produccion16Url = 'http://localhost:8080/api/v1/buscarcodmaestra';//JAVA
+   private _produccion17Url = 'http://localhost:8083/api/v1/Nuevocontenido';
 
   //para servidor
-  // private _produccion1Url = 'http://10.0.0.249:8083/api/v1/firstcombo';
-  // private _produccion2Url = 'http://10.0.0.249:8083/api/v1/secondcomb';
-  // private _produccion3Url = 'http://10.0.0.249:8083/api/v1/grid';
-  // private _produccion4Url = 'http://10.0.0.249:8083/api/v1/post';
-  // private _produccion5Url = 'http://10.0.0.249:8083/api/v1/HorasHombres';
-  // private _produccion6Url = 'http://10.0.0.249:8083/api/v1/PutOperaServi';
-  // private _produccion7Url = 'http://10.0.0.249:8083/api/v1/PutHorasHombre';
-  // private _produccion8Url = 'http://10.0.0.249:8083/api/v1/Getnumcodigo';
-  // private _produccion9Url = 'http://10.0.0.249:8083/api/v1/PostHorasHombres';
-  // private _produccion10Url = 'http://10.0.0.249:8083/api/v1/Getcodigovalidacion';
-  // private _produccion11Url = 'http://10.0.0.249:8083/api/v1/BuscarOperServiciosParam';
-  // private _produccion12Url = 'http://10.0.0.249:8083/api/v1/LISTAROPERSERVCONTENIDOS';
-  // private _produccion13Url = 'http://10.0.0.249:8083/api/v1/Getnumcodigoop';
-  // private _produccion14Url = 'http://10.0.0.249:8083/api/v1/DeleteContenido';
-  // private _produccion15Url = 'http://10.0.0.249:8083/api/v1/UpdateGrilla';
+   private _produccion1Url = 'http://10.0.0.125/flatrate-1.0/api/v1/primercombo'; //JAVA
+    private _produccion2Url = 'http://10.0.0.125/flatrate-1.0/api/v1/segundocombo'; //JAVA
+   private _produccion3Url = 'http://10.0.0.125/flatrate-1.0/api/v1/grilla';//JAVA
+  // private _produccion4Url = 'http://localhost:8083/api/v1/post';
+  private _produccion5Url = 'http://10.0.0.125/flatrate-1.0/api/v1/horashombre';//JAVA
+  // private _produccion6Url = 'http://localhost:8083/api/v1/PutOperaServi';
+  // private _produccion7Url = 'http://localhost:8083/api/v1/PutHorasHombre';
+  private _produccion8Url = 'http://10.0.0.125/flatrate-1.0/api/v1/Getnumcodigo';//JAVA
+  // private _produccion9Url = 'http://localhost:8083/api/v1/PostHorasHombres';
+  private _produccion10Url = 'http://10.0.0.125/flatrate-1.0/api/v1/buscarvalid';//JAVA
+   private _produccion11Url = 'http://10.0.0.125/flatrate-1.0/api/v1/buscar';//JAVA
+   private _produccion12Url = 'http://10.0.0.125/flatrate-1.0/api/v1/listacontenidos';//JAVA
+   private _produccion13Url = 'http://10.0.0.125/flatrate-1.0/api/v1/buscarnumcod';//JAVA
+  // private _produccion14Url = 'http://localhost:8083/api/v1/DeleteContenido';
+  // private _produccion15Url = 'http://localhost:8083/api/v1/UpdateGrilla';
+   private _produccion16Url = 'http://10.0.0.125/flatrate-1.0/api/v1/buscarcodmaestra';//JAVA
+  // private _produccion17Url = 'http://localhost:8083/api/v1/Nuevocontenido';
   lessons = [];
   constructor(private http: Http) { }
 
