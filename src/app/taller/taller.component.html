@@ -98,14 +98,14 @@
           <td>{{beanoperacionservicio.vchcodigooperacion}}-{{beanoperacionservicio.chrcodigooperacionservicio}}</td>
           <!--<td>{{beanoperacionservicio.vchnrotrabajo}}</td>-->
           <td style="width: 600px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" title="{{beanoperacionservicio.vchdescripcion}}">{{beanoperacionservicio.vchdescripcion}}</td>
-          <td style="text-align:right;">{{beanoperacionservicio.numhorashombre | number:'.2'}}</td>
+          <td style="text-align:right;">{{beanoperacionservicio.numhorashombre | number:'.2-2'}}</td>
           <td style="text-align:right;">{{beanoperacionservicio.numpreciosugerido | number:'.2'}}</td>
           <td style="text-align:right;">{{beanoperacionservicio.numdescuento | number:'.2'}}</td>
           <td style="text-align:right;">{{beanoperacionservicio.nummanoobra | number:'.2'}}</td>
           <td style="text-align:right;">{{beanoperacionservicio.numrepuesto | number:'.2'}}</td>
-          <td style="text-align:right;">{{beanoperacionservicio.numrepuesto | number:'.2'}}</td>
+          <td style="text-align:right;">{{beanoperacionservicio.nummantenimiento | number:'.2'}}</td>
           <!-- esto es para el mantenimiento-->
-          <td style="text-align:right;">{{beanoperacionservicio.numtotal | number:'.2'}}</td>
+          <td style="text-align:right;">{{beanoperacionservicio.numtotal | number:'.2-2'}}</td>
         </tr>
       </tbody>
     </table>
@@ -131,8 +131,9 @@
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="vchdescripcion">Descripcion</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="vchdescripcion" required minlength="1" maxlength="100" [ngModel]="beanopser.vchdescripcion"
-            (keyup)="newVchdescripcion(vchdescripcion.value)" #vchdescripcion="ngModel" />
+        <div class="ui-grid-col-8"><!--<textarea rows="5" cols="30" pInputTextarea></textarea>-->
+          <textarea pInputTextarea rows="4" cols="30" id="vchdescripcion" required minlength="1" maxlength="100" [ngModel]="beanopser.vchdescripcion"
+            (keyup)="newVchdescripcion(vchdescripcion.value)" #vchdescripcion="ngModel"></textarea>
           <div *ngIf="vchdescripcion.errors && (vchdescripcion.dirty)" class="alert alert-danger">
             <div [hidden]="!vchdescripcion.errors.required">
               Es necesario ingresar una descripción
@@ -232,8 +233,11 @@
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="vchdescripcion">Descripcion</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="vchdescripcion" minlength="1" maxlength="100" [value]="cuadroSeleccionado3.vchdescripcion"
-            (keyup)="mostrarDescripcion(vchdescripcion.value)" #vchdescripcion/></div>
+        <div class="ui-grid-col-8">
+          <!--<textarea rows="5" cols="30" pInputTextarea></textarea>-->
+          <textarea pInputTextarea id="vchdescripcion" rows="4" cols="30" minlength="1" maxlength="100" [value]="cuadroSeleccionado3.vchdescripcion"
+            (keyup)="mostrarDescripcion(vchdescripcion.value)" #vchdescripcion></textarea>
+          </div>
       </div>
       <!--<div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="vchnrotrabajo">N° de trabajo</label></div>
@@ -312,6 +316,30 @@
     </div>
   </p-dialog>
 
+   <!--Este dialog sirve para ver si el usuario quiere ver los item que no sean contenidos o quiere editar el item-->
+  <p-dialog header="Escoja una opción sin contenido" [(visible)]="Veroeditardialogsincontenido" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" style="font-size: 12px;width: 250px;padding: 0px;">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-8" style="width: 100%;">
+          <button type="button" class="btn btn-primary btn-lg" style="font-size:20px;color: #31708f;background-color: #d9edf7;border-color: #bce8f1;"
+            pButton (click)="EscogerEditarItem()" label="Editar item"></button>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-8" style="width: 100%;">
+          <button type="button" class="btn btn-primary btn-lg disabled"  style="font-size:20px;color: #31708f;background-color: #d9edf7;border-color: #bce8f1;"
+            pButton label="Ver Contenidos"></button>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-8" style="width: 100%;">
+          <button type="button" class="btn btn-primary btn-lg" style="font-size:20px;color: #31708f;background-color: #d9edf7;border-color: #bce8f1;"
+            pButton label="SALIR" (click)="SalirVeroeditardialog()"></button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+
 
   <!--esto es para ver los contenidos-->
   <!-- Modal -->
@@ -338,7 +366,7 @@
                   readonly>
               </div>
               <div class="Complementarios" style="display:inline-block;margin-right:20px;">
-                <span>Complementarios</span><input class="form-control pre-contenido" type="text" placeholder="0" style="width:90px;"
+                <span>Mantenimiento</span><input class="form-control pre-contenido" type="text" placeholder="0" style="width:90px;"
                   readonly>
               </div>
               <div class="Totales" style="display:inline-block;margin-right:20px;">
@@ -377,12 +405,12 @@
                                   </span>
                     </div>
                   </td>
-                  <td style="width: 70px;">{{beanoperacionservicioc.codigo}}</td>
+                  <td style="width: 70px;">{{beanoperacionservicioc.vchcodigooperacion}}-{{beanoperacionservicioc.chrcodigooperacionservicio}}</td>
                   <td style="width: 480px;">{{beanoperacionservicioc.vchdescripcion}}</td>
-                  <td style="text-align:right;">{{beanoperacionservicioc.numhorashombre | number:'.1-2'}}</td>
-                  <td style="text-align:right;">{{beanoperacionservicioc.numpreciosugerido | number:'.1-2'}}</td>
-                  <td style="text-align:right;width: 80px;">{{beanoperacionservicioc.numdescuento}}</td>
-                  <td style="text-align:right;width: 73px;">{{beanoperacionservicioc.numtotal}}</td>
+                  <td style="text-align:right;">{{beanoperacionservicioc.numhorashombre | number:'.2-2'}}</td>
+                  <td style="text-align:right;">{{beanoperacionservicioc.numpreciosugerido | number:'.2-2'}}</td>
+                  <td style="text-align:right;width: 80px;">{{beanoperacionservicioc.numdescuento | number:'.2-2'}}</td>
+                  <td style="text-align:right;width: 73px;">{{beanoperacionservicioc.numtotal | number:'.2-2'}}</td>
                 </tr>
               </tbody>
             </table>
@@ -396,10 +424,10 @@
                   <td style="text-align: center;width: 83px;"></td>
                   <td style="width: 70px;"></td>
                   <td style="width: 480px;">TOTAL</td>
-                  <td style="text-align:right;">{{totalhhcontenido | number:'.1-2'}}</td>
-                  <td style="text-align:right;">{{totalmanoobracontenido | number:'.1-2'}}</td>
-                  <td style="text-align:right;width: 80px;">{{totaldsctcontenido | number:'.1-2'}}</td>
-                  <td style="text-align:right;width: 74px;">{{totalcontenido | number:'.1-2'}}</td>
+                  <td style="text-align:right;">{{totalhhcontenido | number:'.2-2'}}</td>
+                  <td style="text-align:right;">{{totalmanoobracontenido | number:'.2-2'}}</td>
+                  <td style="text-align:right;width: 80px;">{{totaldsctcontenido | number:'.2-2'}}</td>
+                  <td style="text-align:right;width: 74px;">{{totalcontenido | number:'.2-2'}}</td>
                   <td style="width:17px;"></td>
                 </tr>
               </tbody>
@@ -462,12 +490,12 @@
                   <tbody style="font-size: 13px;overflow-y: auto !important;height: 400px !important">
                     <tr *ngFor="let beanoperacionservicionewc of beanoperacionserviciosnewcontenido; let i = index" (click)="setClickedcontenido(i)"
           style="cursor: pointer;" [class.active]="i == selectedcontenido" (click)="validarcontenido(beanoperacionservicionewc)" style="cursor: pointer;font-size: 11px;">
-                      <td style="width: 69px;">{{beanoperacionservicionewc.codigo}}</td>
+                      <td style="width: 69px;">{{beanoperacionservicionewc.vchcodigooperacion}}-{{beanoperacionservicionewc.chrcodigooperacionservicio}}</td>
                       <td style="width: 480px;">{{beanoperacionservicionewc.vchdescripcion}}</td>
-                      <td style="text-align:right;">{{beanoperacionservicionewc.numhorashombre | number:'.1-2'}}</td>
-                      <td style="text-align:right;">{{beanoperacionservicionewc.numpreciosugerido | number:'.1-2'}}</td>
-                      <td style="text-align:right;width: 80px;">{{beanoperacionservicionewc.numdescuento}}</td>
-                      <td style="text-align:right;width: 99px;">{{beanoperacionservicionewc.numtotal}}</td>
+                      <td style="text-align:right;">{{beanoperacionservicionewc.numhorashombre | number:'.2-2'}}</td>
+                      <td style="text-align:right;">{{beanoperacionservicionewc.numpreciosugerido | number:'.2-2'}}</td>
+                      <td style="text-align:right;width: 80px;">{{beanoperacionservicionewc.numdescuento | number:'.2-2'}}</td>
+                      <td style="text-align:right;width: 99px;">{{beanoperacionservicionewc.numtotal | number:'.2-2'}}</td>
                     </tr>
                   </tbody>
                 </table>

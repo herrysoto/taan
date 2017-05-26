@@ -64,6 +64,7 @@ beanservicioscontenido : beanservicios[];
   Actulizarhhdialog: boolean;
   Actualizaritemdialog: boolean;
   Veroeditardialog:boolean;
+  Veroeditardialogsincontenido:boolean;
   valorvch :string;
   valornumhh : number;
   valornumhhdefault : number;
@@ -410,7 +411,8 @@ savehh(numhorashombre:number){
             this.beanopser.numpreciosugerido=this.multipsugerido;
         this.newresta = (this.multipsugerido-this.newdesc);
         this.beanopser.numtotal=this.newresta;
-         if(this.newdesc.toString() == '' || (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
+         if(this.newdesc.toString() == '' || (this.newchrcodigooperacionservicio.length < 5) ||
+         (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
          (this.newchrcodigooperacionservicio == '' || this.newchrcodigooperacionservicio == undefined)){
              this.toggleButton=true;
          }else{
@@ -422,7 +424,8 @@ savehh(numhorashombre:number){
     //esta funcion es para validar la descripcion,si es nulo el valor que se desabilite (lee lo que se ingresa por teclado en la descripcion)
     newVchdescripcion(newdescripcion){
         this.newdescripcion = newdescripcion;
-         if(this.newdesc.toString() == '' || (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
+         if(this.newdesc.toString() == '' || (this.newchrcodigooperacionservicio.length < 5) ||
+         (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
          (this.newchrcodigooperacionservicio == '' || this.newchrcodigooperacionservicio == undefined)){
              this.toggleButton=true;
          }else{
@@ -432,7 +435,8 @@ savehh(numhorashombre:number){
 
     newChrcodigooperacionservicio(newchrcodigooperacionservicio){
        this.newchrcodigooperacionservicio = newchrcodigooperacionservicio;
-        if(this.newdesc.toString() == '' || (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))|| (this.newchrcodigooperacionservicio == '' || this.newchrcodigooperacionservicio == undefined)){
+        if(this.newdesc.toString() == '' || (this.newchrcodigooperacionservicio.length < 5) ||
+        (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))|| (this.newchrcodigooperacionservicio == '' || this.newchrcodigooperacionservicio == undefined)){
              this.toggleButton=true;
          }else{
              this.toggleButton=false;
@@ -442,7 +446,8 @@ savehh(numhorashombre:number){
     //esta funcion es para validar el numero de trabajo,si es nulo el valor que se desabilite (lee lo que se ingresa por teclado en el numero de trabajo)
     newVchnumtrabajo(newnumtrabajo){
         this.newnumtrabajo = newnumtrabajo;
-        if(this.newdesc.toString() == '' || (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
+        if(this.newdesc.toString() == '' || (this.newchrcodigooperacionservicio.length < 5) ||
+        (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
         (this.newchrcodigooperacionservicio == '' || this.newchrcodigooperacionservicio == undefined)){
              this.toggleButton=true;
          }else{
@@ -461,7 +466,8 @@ savehh(numhorashombre:number){
             this.toggleButton=true;
         }else{
             this.beanopser.numtotal=this.newresta;
-            if(this.newdesc.toString() == '' || (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
+            if(this.newdesc.toString() == '' || (this.newchrcodigooperacionservicio.length < 5) ||
+            (this.newdescripcion == undefined || this.newdescripcion == '')||(this.nwhh == 0 || this.nwhh == null || this.nwhh == undefined || isNaN(this.multipsugerido))||
             (this.newchrcodigooperacionservicio == '' || this.newchrcodigooperacionservicio == undefined)){
              this.toggleButton=true;
             }else{
@@ -635,6 +641,7 @@ savehh(numhorashombre:number){
 SalirVeroeditardialog(){
     this.Veroeditardialog = false;
 		this.selectedRow = null;
+        this.Veroeditardialogsincontenido=false;
 }
 
 //funcion para que escoja que hacer si editar item o ver contenidos
@@ -645,13 +652,15 @@ SalirVeroeditardialog(){
                 this.mostrardsctoread=true;
                 this.mostrarhorarhombre=false;
                 this.mostrardscto= false;
+                 this.Veroeditardialog = true;
             }else{
                 this.mostrarhorarhombre=true;
                 this.mostrardscto= true;
                 this.mostrarhorarhombreread=false;
                 this.mostrardsctoread=false;
+                this.Veroeditardialogsincontenido=true;
             }
-        this.Veroeditardialog = true;
+       
     }
 
     EscogerVerContenidos(){
@@ -662,6 +671,7 @@ SalirVeroeditardialog(){
     EscogerEditarItem(){
           this.EditarItem(this.cuadroSeleccionado3);
           this.Veroeditardialog = false;
+          this.Veroeditardialogsincontenido=false;
     }
 
      
@@ -791,9 +801,16 @@ Buscaroperacionservicioparam(){
 
   
     //Validar que no se ingresen items repetidos
-     IsRepetido(beanoperacionservicionewc:beanoperacionservicioscontenido):Boolean{                
+     IsRepetido(beanoperacionservicionewc:beanoperacionservicioscontenido):Boolean{       
+        //  let valorescuadro:any;
+        //   valorescuadro = this.beanoperacionservicioscontenido ;
+        //  console.log(valorescuadro.codigo);
+        // console.log(this.beanoperacionservicioscontenido.length)
                              for (let num of this.beanoperacionservicioscontenido){
-                                 if (beanoperacionservicionewc.codigo == num.codigo ){
+                                 console.log(num.codigo)
+                                 console.log(beanoperacionservicionewc.codigo)
+                                 if (num.codigo.trim() === beanoperacionservicionewc.codigo.trim()){
+                                     console.log("me llega altamente este maldito código :p")
                                     return true;
                                  }
                              }
@@ -803,12 +820,13 @@ Buscaroperacionservicioparam(){
     
     validarcontenido(beanoperacionservicionewc:beanoperacionservicioscontenido):void{
         if(beanoperacionservicionewc.vchcodigooperacion == '1X' || beanoperacionservicionewc.vchcodigooperacion == '1W' || beanoperacionservicionewc.vchcodigooperacion == '1Z'){
-            alert("No se puede insertar un servicio contenido");
+             window.alert("No se puede insertar un servicio contenido");
+          //alert("No se puede insertar un servicio contenido");
             this.selectedcontenido =  null;
             return
         }
         if (this.IsRepetido(beanoperacionservicionewc)==true) {
-            alert("No se puede insertar un servicio contenido porque ya existe");
+            window.alert("No se puede insertar un servicio contenido porque ya existe");
             this.selectedcontenido =  null;
             return
         }
